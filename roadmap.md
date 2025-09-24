@@ -9,19 +9,19 @@ This document outlines the planned future enhancements and features for the Lang
 - **Status**: Planned
 
 ### Feature 003: Enhanced Frontend UI/UX
-- **Description**: Enhance the frontend user interface and user experience with better styling, improved responsiveness, and more intuitive interactions.
+- **Description**: The Angular frontend will be redesigned with a focus on modern aesthetics and improved usability. We'll use a component library like Angular Material to ensure a consistent and polished look. The UI will be fully responsive, adapting to different screen sizes for desktop and mobile use. New interactive elements will be added, such as loading spinners, progress bars, and informative toast notifications, to give the user real-time feedback on the agent's progress. We'll also implement a clean layout that clearly separates the user's input, the agent's response, and any relevant controls.
 - **Status**: Planned
 
 ### Feature 004: User Authentication and Session Management
-- **Description**: Add user authentication and session management to secure the application and personalize user experiences.
+- **Description**: The application will be secured by adding a user authentication system. We'll implement a JWT (JSON Web Token)-based authentication flow. The Express.js backend will handle user registration and login requests, issuing a JWT upon successful authentication. This token will then be stored securely on the Angular frontend. All subsequent API calls to the backend will require this token for authorization. Session management will be handled by the expiration and refresh of these tokens, ensuring that only authenticated users can access the LangChain.js agent functionality.
 - **Status**: Planned
 
 ### Feature 005: Real-time Communication
-- **Description**: Implement real-time communication (e.g., WebSockets) for agent responses to provide a more dynamic and responsive user experience.
+- **Description**: To make the application more dynamic, we'll switch from a traditional REST API to a WebSocket connection for communication between the frontend and the backend. The Express.js server will be configured to handle WebSocket connections, allowing the LangChain.js agent to stream its responses back to the Angular frontend in real time. This will eliminate the need for the user to wait for a single, complete response and will provide a live, conversational feel as the agent generates its output.
 - **Status**: Planned
 
 ### Feature 006: Cloud Deployment
-- **Description**: Develop and document a strategy for deploying the application to a cloud platform (e.g., AWS, Google Cloud, Azure).
+- **Description**: We will document a cloud deployment strategy focused on a platform like Google Cloud Platform (GCP), given your frequent use of Google services. The plan will involve containerizing both the Angular frontend and the Express.js/LangChain.js backend using Docker. The backend will be deployed to a service like Cloud Run or a Kubernetes cluster for scalability and auto-scaling. The frontend will be hosted on Cloud Storage and served via Cloud CDN for fast, global delivery. This plan will also include instructions for setting up environment variables, a CI/CD pipeline, and monitoring for the deployed application.
 - **Status**: Planned
 
 ---
