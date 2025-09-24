@@ -106,6 +106,7 @@ RESEARCH='$feature_dir/research.md'
 DATA_MODEL='$feature_dir/data-model.md'
 QUICKSTART='$feature_dir/quickstart.md'
 CONTRACTS_DIR='$feature_dir/contracts'
+ROADMAP='$repo_root/roadmap.md'
 EOF
 }
 

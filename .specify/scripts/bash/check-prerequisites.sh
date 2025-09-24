@@ -125,6 +125,7 @@ docs=()
 # Always check these optional docs
 [[ -f "$RESEARCH" ]] && docs+=("research.md")
 [[ -f "$DATA_MODEL" ]] && docs+=("data-model.md")
+[[ -f "$ROADMAP" ]] && docs+=("roadmap.md")
 
 # Check contracts directory (only if it exists and has files)
 if [[ -d "$CONTRACTS_DIR" ]] && [[ -n "$(ls -A "$CONTRACTS_DIR" 2>/dev/null)" ]]; then
