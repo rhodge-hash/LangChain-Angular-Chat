@@ -1,0 +1,47 @@
+<div class="bg-gray-800 p-8 md:p-12 rounded-lg shadow-xl max-w-lg w-full transform transition-all duration-300 hover:scale-105">
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-center text-white">Automate Your Blog</h1>
+    <p class="text-center text-gray-400 mb-8">
+      Trigger a LangChain.js agent to generate a new blog post for you.
+    </p>
+    <div class="space-y-4">
+        <input
+            type="text"
+            [(ngModel)]="topic"
+            id="topic-input"
+            class="w-full p-3 rounded-md bg-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors"
+            placeholder="Enter a topic, e.g., 'The future of AI'"
+        />
+        <button
+            id="generate-button"
+            (click)="generatePost()"
+            [disabled]="generateButtonDisabled"
+            class="w-full bg-primary-600 text-white font-semibold py-3 rounded-md shadow-lg hover:bg-primary-700 transition-colors duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+        >
+            Generate Post
+        </button>
+    </div>
+    
+    <div id="status-message" class="mt-8 text-center text-sm font-medium transition-opacity duration-300"
+         [ngClass]="{'text-blue-400': statusType === 'info', 'text-green-400': statusType === 'success', 'text-red-400': statusType === 'error'}">
+        {{ statusMessage }}
+    </div>
+
+    <div id="posts-list" class="mt-8 space-y-4">
+        <ng-container *ngIf="blogPosts.length > 0; else noPosts">
+            <div *ngFor="let post of blogPosts" class="bg-gray-700 p-4 rounded-md shadow-md">
+                <h3 class="text-xl font-bold mb-2 text-white">{{ post.title }}</h3>
+                <p class="text-gray-400 mb-2">
+                    {{ post.publishedAt | date:'mediumDate' }}
+                </p>
+                <a href="#" class="text-primary-400 hover:underline text-sm font-medium">Read Post (in-app)</a>
+            </div>
+        </ng-container>
+        <ng-template #noPosts>
+            <p class="text-center text-gray-400">No posts generated yet. Try one!</p>
+        </ng-template>
+    </div>
+
+    <p class="text-center mt-8 text-xs text-gray-500">
+        Created with LangChain.js and Express. This is a single-file Node.js server.
+    </p>
+</div>

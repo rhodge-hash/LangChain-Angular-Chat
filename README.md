@@ -3,9 +3,12 @@
 ## Project Description
 This project demonstrates a full-stack application integrating a LangChain.js agent with an Angular frontend. Users can input prompts into a simple web interface, which are then processed by the LangChain.js agent hosted on a Node.js/Express.js backend. The primary goal is to showcase the agentic workflow of LangChain.js and its seamless integration within a modern web application.
 
+This application has been enhanced to include a blog post generation feature, where a LangChain.js agent can research a given topic and generate a detailed blog post in Markdown format.
+
 ## Features
 - **Interactive Chat Interface**: A user-friendly Angular frontend for submitting prompts and viewing agent responses.
 - **LangChain.js Integration**: Backend powered by a LangChain.js agent for intelligent prompt processing.
+- **Blog Post Generation**: A dedicated feature to generate comprehensive blog posts on user-specified topics using a LangChain.js agent with search capabilities.
 - **RESTful API**: A simple Express.js API to handle communication between the frontend and the LangChain.js agent.
 - **Error Handling**: Robust error handling for invalid inputs and agent processing failures.
 - **Loading Indicators**: Visual feedback to the user during agent processing.
@@ -16,6 +19,7 @@ This project demonstrates a full-stack application integrating a LangChain.js ag
   - **End-to-End Testing**: Cypress
 - **Backend**: Node.js with Express.js (with JavaScript/TypeScript)
   - **Agentic Framework**: LangChain.js
+  - **Search Tool**: Tavily Search API (used by LangChain agent)
   - **Unit/Integration/API Testing**: Jest
 - **API Definition**: OpenAPI (Swagger)
 
@@ -26,6 +30,11 @@ To get the application up and running on your local machine, follow these steps:
 - [Node.js](https://nodejs.org/) (LTS version recommended)
 - [npm](https://www.npmjs.com/) (comes with Node.js) or [Yarn](https://yarnpkg.com/)
 - [Angular CLI](https://angular.io/cli) (install globally: `npm install -g @angular/cli`)
+- **API Keys**: You will need API keys for the LangChain agent to function correctly. Create a `.env` file in the `backend/` directory with the following:
+  ```
+  OPENAI_API_KEY="your-openai-api-key"
+  SERPAPI_API_KEY="your-serpapi-api-key" # Or Tavily API key if using TavilySearchAPIRetriever
+  ```
 
 ### Installation
 1.  **Clone the repository**:
@@ -37,7 +46,7 @@ To get the application up and running on your local machine, follow these steps:
     Navigate to the `backend` directory and install the required packages:
     ```bash
     cd backend
-    npm install
+    npm install --legacy-peer-deps # Use --legacy-peer-deps to avoid potential dependency conflicts
     cd ..
     ```
 3.  **Install Frontend Dependencies**:
@@ -121,6 +130,44 @@ Processes a user prompt using the LangChain.js agent.
         }
         ```
 
+### `POST /api/generate-blog-post`
+Generates a blog post on a given topic using a LangChain.js agent.
+
+-   **Request Body** (`application/json`):
+    ```json
+    {
+      "topic": "The future of AI"
+    }
+    ```
+-   **Successful Response** (`200 OK`, `application/json`):
+    ```json
+    {
+      "slug": "the-future-of-ai",
+      "title": "The Future of AI",
+      "content": "# The Future of AI\n\n... (Markdown content) ...",
+      "publishedAt": "2025-09-24T12:00:00.000Z"
+    }
+    ```
+-   **Error Responses**:
+    -   `400 Bad Request`: If the `topic` is empty or missing.
+    -   `500 Internal Server Error`: If an error occurs during blog post generation.
+
+### `GET /api/blog-posts`
+Retrieves a list of all generated blog posts.
+
+-   **Successful Response** (`200 OK`, `application/json`):
+    ```json
+    [
+      {
+        "slug": "the-future-of-ai",
+        "title": "The Future of AI",
+        "content": "# The Future of AI\n\n... (Markdown content) ...",
+        "publishedAt": "2025-09-24T12:00:00.000Z"
+      },
+      // ... more posts
+    ]
+    ```
+
 ## Project Structure
 ```
 . # Project Root
@@ -129,9 +176,11 @@ Processes a user prompt using the LangChain.js agent.
 │   │   ├── app.js
 │   │   ├── main.js
 │   │   ├── routes/
-│   │   │   └── agent.js
+│   │   │   ├── agent.js
+│   │   │   └── blog.js
 │   │   └── services/
-│   │       └── agent.service.js
+│   │       ├── agent.service.js
+│   │       └── blog.service.js
 │   ├── tests/
 │   │   ├── contract/
 │   │   │   └── process-prompt.test.js
@@ -144,14 +193,19 @@ Processes a user prompt using the LangChain.js agent.
 │   ├── src/
 │   │   ├── app/
 │   │   │   ├── components/
-│   │   │   │   └── agent-chat/
-│   │   │   │       ├── agent-chat.component.css
-│   │   │   │       ├── agent-chat.component.html
-│   │   │   │       ├── agent-chat.component.spec.ts
-│   │   │   │       └── agent-chat.component.ts
+│   │   │   │   ├── agent-chat/
+│   │   │   │   │   ├── agent-chat.component.css
+│   │   │   │   │   ├── agent-chat.component.html
+│   │   │   │   │   ├── agent-chat.component.spec.ts
+│   │   │   │   │   └── agent-chat.component.ts
+│   │   │   │   └── blog-generator/
+│   │   │   │       ├── blog-generator.component.css
+│   │   │   │       ├── blog-generator.component.html
+│   │   │   │       └── blog-generator.component.ts
 │   │   │   └── services/
 │   │   │       ├── agent.service.spec.ts
-│   │   │       └── agent.service.ts
+│   │   │       ├── agent.service.ts
+│   │   │       └── blog.service.ts
 │   │   └── ... (other Angular files)
 │   ├── e2e/
 │   │   └── src/
@@ -184,3 +238,6 @@ Processes a user prompt using the LangChain.js agent.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details. (Note: A LICENSE file is not provided in this example, but would typically be included.)
+
+---
+*Generated by Gemini CLI Agent on September 24, 2025*
