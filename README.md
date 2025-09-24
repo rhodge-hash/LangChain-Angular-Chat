@@ -3,12 +3,13 @@
 ## Project Description
 This project demonstrates a full-stack application integrating a LangChain.js agent with an Angular frontend. Users can input prompts into a simple web interface, which are then processed by the LangChain.js agent hosted on a Node.js/Express.js backend. The primary goal is to showcase the agentic workflow of LangChain.js and its seamless integration within a modern web application.
 
-This application has been enhanced to include a blog post generation feature, where a LangChain.js agent can research a given topic and generate a detailed blog post in Markdown format.
+This application has been enhanced to include a blog post generation feature, where a LangChain.js agent can research a given topic and generate a detailed blog post in Markdown format. Furthermore, it now supports **sophisticated LangChain.js agents** with advanced capabilities like conversational memory, complex reasoning, and integration with various tools (search, calculator, file system).
 
 ## Features
 - **Interactive Chat Interface**: A user-friendly Angular frontend for submitting prompts and viewing agent responses.
 - **LangChain.js Integration**: Backend powered by a LangChain.js agent for intelligent prompt processing.
 - **Blog Post Generation**: A dedicated feature to generate comprehensive blog posts on user-specified topics using a LangChain.js agent with search capabilities.
+- **Sophisticated Agents**: Enhanced agents with conversational memory, complex reasoning, and tool integration (search, calculator, file system).
 - **RESTful API**: A simple Express.js API to handle communication between the frontend and the LangChain.js agent.
 - **Error Handling**: Robust error handling for invalid inputs and agent processing failures.
 - **Loading Indicators**: Visual feedback to the user during agent processing.
@@ -18,8 +19,10 @@ This application has been enhanced to include a blog post generation feature, wh
   - **Unit/Integration Testing**: Jest
   - **End-to-End Testing**: Cypress
 - **Backend**: Node.js with Express.js (with JavaScript/TypeScript)
-  - **Agentic Framework**: LangChain.js
+  - **Agentic Framework**: LangChain.js, LangGraph.js (for multi-agent workflows)
   - **Search Tool**: Tavily Search API (used by LangChain agent)
+  - **Other Tools**: File System (via `FileManagementToolkit`), Calculator (via `Calculator` class)
+  - **Memory**: `ConversationBufferWindowMemory`
   - **Unit/Integration/API Testing**: Jest
 - **API Definition**: OpenAPI (Swagger)
 
@@ -102,7 +105,7 @@ npx cypress open # Or your configured E2E test command
 ## API Endpoints
 
 ### `POST /api/process-prompt`
-Processes a user prompt using the LangChain.js agent.
+Processes a user prompt using the basic LangChain.js agent.
 
 -   **Request Body** (`application/json`):
     ```json
@@ -152,6 +155,28 @@ Generates a blog post on a given topic using a LangChain.js agent.
     -   `400 Bad Request`: If the `topic` is empty or missing.
     -   `500 Internal Server Error`: If an error occurs during blog post generation.
 
+### `POST /api/advanced-agent-chat`
+Interacts with a sophisticated LangChain.js agent, supporting conversational memory and tool usage (search, calculator, file system).
+
+-   **Request Body** (`application/json`):
+    ```json
+    {
+      "prompt": "What is the capital of France? Then, what is the population of that city?",
+      "sessionId": "user-123-session-abc"
+    }
+    ```
+-   **Successful Response** (`200 OK`, `application/json`):
+    ```json
+    {
+      "output": "The capital of France is Paris. The population of Paris is approximately 2.1 million.",
+      "intermediateSteps": [...],
+      "memoryState": {...}
+    }
+    ```
+-   **Error Responses**:
+    -   `400 Bad Request`: If the `prompt` or `sessionId` is empty/missing.
+    -   `500 Internal Server Error`: If an error occurs during agent processing.
+
 ### `GET /api/blog-posts`
 Retrieves a list of all generated blog posts.
 
@@ -177,18 +202,24 @@ Retrieves a list of all generated blog posts.
 │   │   ├── main.js
 │   │   ├── routes/
 │   │   │   ├── agent.js
-│   │   │   └── blog.js
+│   │   │   ├── blog.js
+│   │   │   └── advanced-agent.js
 │   │   └── services/
 │   │       ├── agent.service.js
-│   │       └── blog.service.js
+│   │       ├── blog.service.js
+│   │       ├── advanced-agent.service.js
+│   │       └── prompt.js
 │   ├── tests/
 │   │   ├── contract/
-│   │   │   └── process-prompt.test.js
+│   │   │   ├── process-prompt.test.js
+│   │   │   └── advanced-agent-chat.test.js
 │   │   └── unit/
-│   │       └── agent.test.js
+│   │       ├── agent.test.js
+│   │       └── advanced-agent.test.js
 │   ├── package.json
 │   ├── .eslintrc.json
-│   └── .prettierrc.json
+│   ├── .prettierrc.json
+│   └── agent_workspace/ # For file system tool
 ├── frontend/
 │   ├── src/
 │   │   ├── app/
@@ -198,25 +229,41 @@ Retrieves a list of all generated blog posts.
 │   │   │   │   │   ├── agent-chat.component.html
 │   │   │   │   │   ├── agent-chat.component.spec.ts
 │   │   │   │   │   └── agent-chat.component.ts
-│   │   │   │   └── blog-generator/
-│   │   │   │       ├── blog-generator.component.css
-│   │   │   │       ├── blog-generator.component.html
-│   │   │   │       └── blog-generator.component.ts
+│   │   │   │   ├── blog-generator/
+│   │   │   │   │   ├── blog-generator.component.css
+│   │   │   │   │   ├── blog-generator.component.html
+│   │   │   │   │   └── blog-generator.component.ts
+│   │   │   │   └── advanced-agent-chat/
+│   │   │   │       ├── advanced-agent-chat.component.css
+│   │   │   │       ├── advanced-agent-chat.component.html
+│   │   │   │       ├── advanced-agent-chat.component.spec.ts
+│   │   │   │       └── advanced-agent-chat.component.ts
 │   │   │   └── services/
 │   │   │       ├── agent.service.spec.ts
 │   │   │       ├── agent.service.ts
-│   │   │       └── blog.service.ts
+│   │   │       ├── blog.service.ts
+│   │   │       └── advanced-agent.service.ts
 │   │   └── ... (other Angular files)
 │   ├── e2e/
 │   │   └── src/
-│   │       └── agent-chat.e2e-spec.ts
+│   │       ├── agent-chat.e2e-spec.ts
+│   │       └── advanced-agent-chat.e2e-spec.ts
 │   ├── angular.json
 │   ├── package.json
 │   ├── proxy.conf.json
 │   ├── .eslintrc.json
 │   └── .prettierrc.json
 ├── specs/
-│   └── 001-build-an-application/
+│   ├── 001-build-an-application/
+│   │   ├── spec.md
+│   │   ├── plan.md
+│   │   ├── research.md
+│   │   ├── data-model.md
+│   │   ├── quickstart.md
+│   │   ├── tasks.md
+│   │   └── contracts/
+│   │       └── process-prompt.yaml
+│   └── 002-feature-002-sophisticated/
 │       ├── spec.md
 │       ├── plan.md
 │       ├── research.md
@@ -224,10 +271,12 @@ Retrieves a list of all generated blog posts.
 │       ├── quickstart.md
 │       ├── tasks.md
 │       └── contracts/
-│           └── process-prompt.yaml
+│           └── advanced-agent-chat.yaml
 ├── GEMINI.md
+├── CHANGELOG.md
+├── roadmap.md
 └── README.md
-```
+
 
 ## Future Enhancements
 For a detailed roadmap of future enhancements, please refer to the [Roadmap](roadmap.md) document.

@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.2.0 - 2025-09-24
+
+### Added
+- **Feature 002: Sophisticated LangChain.js Agents**: Implemented advanced LangChain.js agents with conversational memory, complex reasoning, and integration of search, calculator, and file system tools.
+  - New backend API endpoint: `POST /api/advanced-agent-chat` for interacting with sophisticated agents.
+  - New Angular component (`AdvancedAgentChatComponent`) for advanced agent interaction.
+  - New backend service (`advanced-agent.service.js`) and route (`advanced-agent.js`) for the sophisticated agent.
+  - New frontend service (`advanced-agent.service.ts`) and component (`advanced-agent-chat`) for the sophisticated agent.
+  - Added unit and E2E tests for the sophisticated agent feature.
+
+### Changed
+- Updated `README.md` to reflect the new sophisticated agent feature, API endpoints, and updated project structure.
+- Updated `quickstart.md` for Feature 002 with setup and verification steps for the sophisticated agent.
+- Modified backend to use ES module syntax consistently.
+- Configured Jest for backend to support ES modules.
+
+### Removed
+- (No removals in this version)
+
 ## 0.1.0 - 2025-09-24
 
 ### Added
@@ -13,7 +32,7 @@
 
 ### Changed
 - Updated `README.md` to reflect the new blog generation feature, API endpoints, and updated setup instructions.
-- Modified backend to use ES module syntax.
+- Modified backend to use ES module syntax consistently.
 - Configured Angular proxy for seamless frontend-backend communication.
 
 ### Removed

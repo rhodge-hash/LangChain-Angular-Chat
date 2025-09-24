@@ -1,19 +1,19 @@
-const { OpenAI } = require('langchain/llms/openai');
-const { initializeAgentExecutorWithOptions } = require('langchain/agents');
-const { SerpAPI } = require('langchain/tools');
+import { OpenAI } from '@langchain/openai';
+import { initializeAgentExecutorWithOptions } from 'langchain/agents';
+import { SerpAPI } from '@langchain/community/tools/serpapi';
 
 // For demonstration purposes, we'll use a simple OpenAI LLM and SerpAPI tool.
 // In a real application, you would configure these with API keys and more sophisticated tools.
 const model = new OpenAI({ temperature: 0 });
 const tools = [
-  new SerpAPI(process.env.SERPAPI_API_KEY, { // SERPAPI_API_KEY needs to be set in environment variables
+  new SerpAPI(process.env.SERPAPI_API_KEY, {
     location: "Austin, Texas, United States",
     hl: "en",
     gl: "us",
   }),
 ];
 
-const executor = initializeAgentExecutorWithOptions(tools, model, { // Removed 'agentType' as it's not a valid option
+const executor = initializeAgentExecutorWithOptions(tools, model, {
   agentType: "zero-shot-react-description",
   verbose: true,
 });
@@ -28,4 +28,4 @@ async function processPrompt(prompt) {
   }
 }
 
-module.exports = { processPrompt };
+export { processPrompt };

@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import { processPrompt } from '../services/agent.service.js';
+
 const router = express.Router();
-const agentService = require('../services/agent.service'); // Will be created in T012
 
 router.post('/process-prompt', async (req, res) => {
   const { prompt } = req.body;
@@ -10,7 +11,7 @@ router.post('/process-prompt', async (req, res) => {
   }
 
   try {
-    const response = await agentService.processPrompt(prompt);
+    const response = await processPrompt(prompt);
     res.status(200).json({ response });
   } catch (error) {
     console.error('Error processing prompt:', error);
@@ -18,4 +19,4 @@ router.post('/process-prompt', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

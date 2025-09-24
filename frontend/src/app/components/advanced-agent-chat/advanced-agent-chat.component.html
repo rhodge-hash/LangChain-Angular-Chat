@@ -1,0 +1,42 @@
+<div class="advanced-agent-chat-container">
+  <h1>Sophisticated LangChain.js Agent</h1>
+
+  <div class="session-info">
+    Session ID: <strong>{{ sessionId }}</strong>
+    <button (click)="generateNewSessionId()">New Session</button>
+  </div>
+
+  <div class="chat-window">
+    <div *ngIf="response" class="response-display">
+      <strong>Agent:</strong> {{ response }}
+    </div>
+    <div *ngIf="intermediateSteps.length > 0" class="intermediate-steps">
+      <h3>Intermediate Steps:</h3>
+      <div *ngFor="let step of intermediateSteps" class="step">
+        <p><strong>Tool:</strong> {{ step.tool }}</p>
+        <p><strong>Input:</strong> {{ step.toolInput }}</p>
+        <p><strong>Observation:</strong> {{ step.observation }}</p>
+      </div>
+    </div>
+    <div *ngIf="isLoading" class="loading-indicator">
+      Processing...
+    </div>
+    <div *ngIf="errorMessage" class="error-message">
+      Error: {{ errorMessage }}
+    </div>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" class="prompt-form">
+    <input
+      type="text"
+      [(ngModel)]="prompt"
+      name="promptInput"
+      placeholder="Enter your prompt..."
+      class="prompt-input"
+      [disabled]="isLoading"
+    />
+    <button type="submit" [disabled]="isLoading || !prompt.trim()" class="submit-button">
+      Submit
+    </button>
+  </form>
+</div>

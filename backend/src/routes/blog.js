@@ -1,5 +1,5 @@
 import express from 'express';
-import { generateBlogPost, getBlogPosts } from '../services/blog.service';
+import { generateBlogPost, getBlogPosts } from '../services/blog.service.js';
 
 const router = express.Router();
 

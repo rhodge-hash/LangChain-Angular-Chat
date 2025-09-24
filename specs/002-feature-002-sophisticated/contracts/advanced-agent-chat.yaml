@@ -1,0 +1,74 @@
+openapi: 3.0.0
+info:
+  title: Advanced LangChain.js Agent API
+  version: 1.0.0
+paths:
+  /api/advanced-agent-chat:
+    post:
+      summary: Interact with a sophisticated LangChain.js agent with memory and tools
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - prompt
+              properties:
+                prompt:
+                  type: string
+                  description: The user's input prompt
+                  example: "What is the capital of France? Then, what is the population of that city?"
+                sessionId:
+                  type: string
+                  description: Optional. A unique identifier for the conversation session to maintain memory.
+                  example: "user-123-session-abc"
+      responses:
+        '200':
+          description: Successful response from the advanced agent
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - output
+                properties:
+                  output:
+                    type: string
+                    description: The final processed response from the LangChain.js agent.
+                    example: "The capital of France is Paris. The population of Paris is approximately 2.1 million."
+                  intermediateSteps:
+                    type: array
+                    description: Optional. A list of intermediate steps taken by the agent (e.g., tool calls, thoughts).
+                    items:
+                      type: object
+                      properties:
+                        tool:
+                          type: string
+                        toolInput:
+                          type: string
+                        observation:
+                          type: string
+                  memoryState:
+                    type: object
+                    description: Optional. The current state of the agent's memory after the interaction.
+        '400':
+          description: Invalid input prompt or session ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Prompt cannot be empty."
+        '500':
+          description: Internal server error or agent error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "An error occurred while processing the prompt."
