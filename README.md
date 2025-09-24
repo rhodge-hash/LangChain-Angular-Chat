@@ -230,11 +230,7 @@ Retrieves a list of all generated blog posts.
 ```
 
 ## Future Enhancements
-- Implement more sophisticated LangChain.js agents with additional tools.
-- Enhance the frontend UI/UX with better styling and responsiveness.
-- Add user authentication and session management.
-- Implement real-time communication (e.g., WebSockets) for agent responses.
-- Deploy the application to a cloud platform.
+For a detailed roadmap of future enhancements, please refer to the [Roadmap](roadmap.md) document.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details. (Note: A LICENSE file is not provided in this example, but would typically be included.)
