@@ -1,0 +1,41 @@
+/* Minimalist Dark Mode Styling */
+body {
+  background-color: #121212; /* Dark background */
+  color: #e0e0e0; /* Light text */
+  font-family: 'Roboto', sans-serif; /* Modern font */
+}
+
+.sidenav-container {
+  height: calc(100vh - 64px); /* Adjust for toolbar height */
+  background-color: #1e1e1e;
+}
+
+.sidenav {
+  width: 200px;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+.sidenav-content {
+  padding: 20px;
+  background-color: #121212;
+}
+
+.mat-toolbar.mat-primary {
+  background-color: #3f51b5; /* Primary color for toolbar */
+  color: #ffffff;
+}
+
+/* Accent color for key UI elements (e.g., buttons, active states) */
+.mat-accent {
+  color: #00bcd4; /* Bright blue accent */
+}
+
+/* Basic styling for links in sidenav */
+.mat-nav-list a {
+  color: #e0e0e0;
+}
+
+.mat-nav-list a.mat-list-item-active {
+  background-color: rgba(0, 188, 212, 0.2); /* Accent with transparency */
+}

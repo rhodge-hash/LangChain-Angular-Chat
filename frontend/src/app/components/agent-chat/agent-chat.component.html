@@ -6,7 +6,8 @@
       <strong>Agent:</strong> {{ response }}
     </div>
     <div *ngIf="isLoading" class="loading-indicator">
-      Processing...
+      <mat-spinner diameter="30"></mat-spinner> <!-- Angular Material Spinner -->
+      <p>Processing...</p>
     </div>
     <div *ngIf="errorMessage" class="error-message">
       Error: {{ errorMessage }}

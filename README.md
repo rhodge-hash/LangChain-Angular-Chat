@@ -6,7 +6,7 @@ This project demonstrates a full-stack application integrating a LangChain.js ag
 This application has been enhanced to include a blog post generation feature, where a LangChain.js agent can research a given topic and generate a detailed blog post in Markdown format. Furthermore, it now supports **sophisticated LangChain.js agents** with advanced capabilities like conversational memory, complex reasoning, and integration with various tools (search, calculator, file system).
 
 ## Features
-- **Interactive Chat Interface**: A user-friendly Angular frontend for submitting prompts and viewing agent responses.
+- **Enhanced Frontend UI/UX**: A modern, responsive, and intuitive Angular frontend with Angular Material components, minimalist dark mode, real-time feedback (spinners, progress bars, toast notifications), and graceful error handling.
 - **LangChain.js Integration**: Backend powered by a LangChain.js agent for intelligent prompt processing.
 - **Blog Post Generation**: A dedicated feature to generate comprehensive blog posts on user-specified topics using a LangChain.js agent with search capabilities.
 - **Sophisticated Agents**: Enhanced agents with conversational memory, complex reasoning, and tool integration (search, calculator, file system).
@@ -16,6 +16,7 @@ This application has been enhanced to include a blog post generation feature, wh
 
 ## Technologies Used
 - **Frontend**: Angular (with TypeScript)
+  - **UI Component Library**: Angular Material
   - **Unit/Integration Testing**: Jest
   - **End-to-End Testing**: Cypress
 - **Backend**: Node.js with Express.js (with JavaScript/TypeScript)

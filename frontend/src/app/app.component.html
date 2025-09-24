@@ -1,4 +1,19 @@
-<main class="main">
-  <app-advanced-agent-chat></app-advanced-agent-chat>
-</main>
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">
+  <span>Enhanced Frontend UI/UX</span>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <!-- Navigation items will go here -->
+    <mat-nav-list>
+      <a mat-list-item routerLink="/advanced-agent-chat">Advanced Agent Chat</a>
+      <a mat-list-item routerLink="/agent-chat">Agent Chat</a>
+      <a mat-list-item routerLink="/blog-generator">Blog Generator</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="sidenav-content">
+    <main class="main">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

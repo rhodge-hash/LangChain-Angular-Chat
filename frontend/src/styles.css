@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Define a dark theme
+$my-dark-theme: mat.define-dark-theme((
+  color: (
+    primary: mat.define-palette(mat.$indigo-palette),
+    accent: mat.define-palette(mat.$cyan-palette, A200, A100, A400),
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+// Emit theme-dependent styles for the custom theme.
+@include mat.all-component-themes($my-dark-theme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Snackbar styles */
+.success-snackbar {
+  background: #4CAF50; /* Green */
+  color: white;
+}
+
+.error-snackbar {
+  background: #F4436; /* Red */
+  color: white;
+}
+
+.warning-snackbar {
+  background: #FFC107; /* Amber */
+  color: black;
+}
+
+.info-snackbar {
+  background: #2196F3; /* Blue */
+  color: white;
+}

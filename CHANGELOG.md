@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.3.0 - 2025-09-24
+
+### Added
+- **Feature 003: Enhanced Frontend UI/UX**: Implemented a modern, responsive, and intuitive Angular frontend.
+  - Integrated Angular Material for consistent styling and components.
+  - Implemented minimalist dark mode design.
+  - Added real-time feedback mechanisms: loading spinners, progress bars, and informative toast notifications.
+  - Enhanced error handling with a global error handler and user-friendly notifications.
+  - Refactored `agent-chat` and `advanced-agent-chat` components to utilize the new design system.
+
+### Changed
+- Updated `README.md` to reflect the new UI/UX enhancements and mention Angular Material.
+- Modified `frontend/src/app/app.component.html` and `frontend/src/app/app.component.ts` for base UI layout with Angular Material.
+- Updated `frontend/src/app/app.config.ts` to include `provideAnimations()` and register `GlobalErrorHandler`.
+- Modified `frontend/src/styles.css` and `frontend/src/app/app.css` for global theming and responsive design.
+- Updated `frontend/e2e/src/enhanced-ui.e2e-spec.ts` and `frontend/e2e/src/enhanced-ui.po.ts` for integration tests.
+- Modified `frontend/src/app/components/agent-chat/agent-chat.component.html` and `frontend/src/app/components/agent-chat/agent-chat.component.ts` to include Material spinners and `NotificationService`.
+- Modified `frontend/src/app/components/advanced-agent-chat/advanced-agent-chat.component.html` and `frontend/src/app/components/advanced-agent-chat/advanced-agent-chat.component.ts` to include Material components and `NotificationService`.
+- Created `frontend/src/app/services/notification.service.ts` and `frontend/src/app/services/error-handler.service.ts`.
+- Created unit tests for `NotificationService` and `GlobalErrorHandler`.
+
+### Removed
+- (No removals in this version)
+
 ## 0.2.0 - 2025-09-24
 
 ### Added
