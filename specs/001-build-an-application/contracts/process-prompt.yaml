@@ -1,0 +1,55 @@
+openapi: 3.0.0
+info:
+  title: LangChain.js Agent API
+  version: 1.0.0
+paths:
+  /api/process-prompt:
+    post:
+      summary: Process a user prompt using the LangChain.js agent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - prompt
+              properties:
+                prompt:
+                  type: string
+                  description: The user's input prompt
+                  example: "What is the capital of France?"
+      responses:
+        '200':
+          description: Successful response from the agent
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - response
+                properties:
+                  response:
+                    type: string
+                    description: The processed response from the LangChain.js agent
+                    example: "Paris"
+        '400':
+          description: Invalid input prompt
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Prompt cannot be empty."
+        '500':
+          description: Internal server error or agent error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "An error occurred while processing the prompt."

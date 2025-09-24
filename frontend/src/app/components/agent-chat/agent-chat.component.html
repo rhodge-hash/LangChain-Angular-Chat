@@ -1,0 +1,29 @@
+<div class="agent-chat-container">
+  <h1>LangChain.js Agent Chat</h1>
+
+  <div class="chat-window">
+    <div *ngIf="response" class="response-display">
+      <strong>Agent:</strong> {{ response }}
+    </div>
+    <div *ngIf="isLoading" class="loading-indicator">
+      Processing...
+    </div>
+    <div *ngIf="errorMessage" class="error-message">
+      Error: {{ errorMessage }}
+    </div>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" class="prompt-form">
+    <input
+      type="text"
+      [(ngModel)]="prompt"
+      name="promptInput"
+      placeholder="Enter your prompt..."
+      class="prompt-input"
+      [disabled]="isLoading"
+    />
+    <button type="submit" [disabled]="isLoading || !prompt.trim()" class="submit-button">
+      Submit
+    </button>
+  </form>
+</div>
