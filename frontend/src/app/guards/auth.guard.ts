@@ -1,0 +1,36 @@
+import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { NotificationService } from '../services/notification.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private notificationService: NotificationService
+  ) { }
+
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+    if (this.authService.isLoggedIn()) {
+      // Check if route requires specific roles
+      const requiredRoles = route.data['roles'] as Array<string>;
+      if (requiredRoles && !this.authService.hasRole(requiredRoles)) {
+        this.notificationService.showError('You do not have permission to access this page.');
+        return this.router.createUrlTree(['/']); // Redirect to home or unauthorized page
+      }
+      return true;
+    }
+
+    // Not logged in, redirect to login page
+    this.notificationService.showWarning('Please log in to access this page.');
+    return this.router.createUrlTree(['/login']);
+  }
+}

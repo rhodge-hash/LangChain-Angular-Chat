@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.4.0 - 2025-09-24
+
+### Added
+- **Feature 004: User Authentication and Session Management**: Implemented a secure JWT-based authentication system.
+  - Backend Express.js routes for user registration (`/api/auth/register`), login (`/api/auth/login`), and token refresh (`/api/auth/refresh-token`).
+  - User entity with Email, Hashed Password, and Roles (in-memory store for prototype).
+  - Password hashing and salting using `bcryptjs`.
+  - JWT generation and validation using `jsonwebtoken`.
+  - Rate limiting middleware (`express-rate-limit`) applied to authentication routes.
+  - JWT authentication middleware to protect backend API endpoints.
+  - Frontend Angular components for user login and registration.
+  - Frontend `AuthService` for authentication logic, token management (stored in `localStorage`), and silent token refresh.
+  - JWT interceptor (`JwtInterceptor`) to attach tokens to outgoing requests.
+  - Route guards (`AuthGuard`) to protect frontend routes based on authentication status and roles.
+  - Unit tests for backend `auth.service.js` and frontend `auth.service.ts`.
+  - Contract tests for backend authentication API endpoints.
+  - Integration tests for frontend authentication scenarios.
+
+### Changed
+- Updated `README.md` to reflect the new authentication feature and related technologies.
+- Modified `backend/src/app.js` to include authentication routes and apply JWT authentication middleware to protected routes.
+- Modified `frontend/src/app/app.component.ts` and `app.component.html` to conditionally display navigation based on authentication status.
+- Updated `frontend/src/app/app.config.ts` to register `JwtInterceptor`.
+
+### Removed
+- (No removals in this version)
+
 ## 0.3.0 - 2025-09-24
 
 ### Added
