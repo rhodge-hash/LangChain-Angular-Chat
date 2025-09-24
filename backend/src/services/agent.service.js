@@ -18,12 +18,25 @@ const executor = initializeAgentExecutorWithOptions(tools, model, {
   verbose: true,
 });
 
-async function processPrompt(prompt) {
+async function processPrompt(prompt, ws, sessionId) { // Add ws and sessionId
   try {
-    const result = await executor.call({ input: prompt });
-    return result.output;
+    // LangChain streaming example (conceptual, actual implementation might vary based on LangChain.js version)
+    const stream = await executor.stream({ input: prompt });
+
+    ws.send(JSON.stringify({ type: 'start', sessionId: sessionId, timestamp: Date.now() }));
+
+    for await (const chunk of stream) {
+      // Assuming chunk has an 'output' property for the streamed text
+      if (chunk.output) {
+        ws.send(JSON.stringify({ type: 'chunk', sessionId: sessionId, content: chunk.output, timestamp: Date.now() }));
+      }
+    }
+
+    ws.send(JSON.stringify({ type: 'end', sessionId: sessionId, timestamp: Date.now() }));
+
   } catch (error) {
     console.error('LangChain agent error:', error);
+    ws.send(JSON.stringify({ type: 'error', sessionId: sessionId, error: 'Failed to get response from agent.', timestamp: Date.now() }));
     throw new Error('Failed to get response from agent.');
   }
 }

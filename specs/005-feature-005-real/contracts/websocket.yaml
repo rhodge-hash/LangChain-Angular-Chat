@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: Agent WebSocket Communication
+  version: 1.0.0
+channels:
+  /ws/agent:
+    description: WebSocket channel for real-time agent communication
+    publish:
+      summary: Send agent prompt
+      message:
+        name: AgentPrompt
+        payload:
+          type: object
+          required:
+            - prompt
+            - sessionId
+          properties:
+            prompt:
+              type: string
+              description: The user's prompt for the agent.
+            sessionId:
+              type: string
+              description: Unique identifier for the conversation session.
+    subscribe:
+      summary: Receive agent response stream
+      message:
+        name: AgentResponseChunk
+        payload:
+          type: object
+          required:
+            - type
+            - content
+            - sessionId
+          properties:
+            type:
+              type: string
+              enum: [start, chunk, end, error]
+              description: Type of the message in the stream.
+            content:
+              type: string
+              description: Partial or full content of the agent's response.
+            sessionId:
+              type: string
+              description: Unique identifier for the conversation session.
+            timestamp:
+              type: number
+              description: Timestamp of the message.
+            error:
+              type: string
+              description: Error message if type is 'error'.

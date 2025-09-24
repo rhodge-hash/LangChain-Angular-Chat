@@ -47,20 +47,30 @@ const createAdvancedAgent = async (sessionId) => {
   return executor;
 };
 
-const processAdvancedPrompt = async (prompt, sessionId) => {
+const processAdvancedPrompt = async (prompt, sessionId, ws) => { // Add ws
   if (!sessionId) {
     throw new Error("Session ID is required for advanced agent interaction.");
   }
 
   try {
     const agentExecutor = await createAdvancedAgent(sessionId);
-    const result = await agentExecutor.invoke({ input: prompt });
+    // LangChain streaming example (conceptual, actual implementation might vary based on LangChain.js version)
+    const stream = await agentExecutor.stream({ input: prompt });
 
-    // The result.output contains the final answer.
-    // The agent's memory is automatically updated by the executor.
-    return { output: result.output, intermediateSteps: result.intermediateSteps };
+    ws.send(JSON.stringify({ type: 'start', sessionId: sessionId, timestamp: Date.now() }));
+
+    for await (const chunk of stream) {
+      // Assuming chunk has an 'output' property for the streamed text
+      if (chunk.output) {
+        ws.send(JSON.stringify({ type: 'chunk', sessionId: sessionId, content: chunk.output, timestamp: Date.now() }));
+      }
+    }
+
+    ws.send(JSON.stringify({ type: 'end', sessionId: sessionId, timestamp: Date.now() }));
+
   } catch (error) {
     console.error('Advanced LangChain agent error:', error);
+    ws.send(JSON.stringify({ type: 'error', sessionId: sessionId, error: 'Failed to get response from advanced agent.', timestamp: Date.now() }));
     throw new Error('Failed to get response from advanced agent.');
   }
 };

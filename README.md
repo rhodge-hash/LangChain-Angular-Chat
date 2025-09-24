@@ -6,6 +6,7 @@ This project demonstrates a full-stack application integrating a LangChain.js ag
 This application has been enhanced to include a blog post generation feature, where a LangChain.js agent can research a given topic and generate a detailed blog post in Markdown format. Furthermore, it now supports **sophisticated LangChain.js agents** with advanced capabilities like conversational memory, complex reasoning, and integration with various tools (search, calculator, file system).
 
 ## Features
+- **Real-time Communication**: Switched from traditional REST API to WebSocket for agent-frontend communication, enabling real-time streaming of LangChain.js agent responses for a dynamic and conversational feel.
 - **User Authentication and Session Management**: Secure user authentication system with JWT-based flow, including user registration, login, and silent token refresh. Access to agent functionality is restricted to authenticated users.
 - **Enhanced Frontend UI/UX**: A modern, responsive, and intuitive Angular frontend with Angular Material components, minimalist dark mode, real-time feedback (spinners, progress bars, toast notifications), and graceful error handling.
 - **LangChain.js Integration**: Backend powered by a LangChain.js agent for intelligent prompt processing.
@@ -23,6 +24,7 @@ This application has been enhanced to include a blog post generation feature, wh
   - **End-to-End Testing**: Cypress
 - **Backend**: Node.js with Express.js (with JavaScript/TypeScript)
   - **Authentication**: `jsonwebtoken`, `bcryptjs`, `express-rate-limit`
+  - **Real-time Communication**: `ws` (WebSocket library)
   - **Agentic Framework**: LangChain.js, LangGraph.js (for multi-agent workflows)
   - **Search Tool**: Tavily Search API (used by LangChain agent)
   - **Other Tools**: File System (via `FileManagementToolkit`), Calculator (via `Calculator` class)

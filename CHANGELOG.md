@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.5.0 - 2025-09-24
+
+### Added
+- **Feature 005: Real-time Communication**: Implemented real-time, streaming communication between frontend and backend using WebSockets.
+  - Configured Express.js backend to handle WebSocket connections.
+  - Modified LangChain.js agent logic to stream responses in chunks over WebSocket.
+  - Implemented frontend WebSocket client (`WebsocketService`) for connection management and message handling.
+  - Modified agent chat components to use WebSocket for sending prompts and receiving streamed responses.
+  - Implemented progressive display of streamed responses in frontend chat components.
+  - Implemented WebSocket error handling and reconnection logic in the frontend.
+  - Integrated JWT authentication with WebSocket connections for secure communication.
+  - Unit tests for backend WebSocket server and frontend WebSocket service.
+  - Contract tests for WebSocket communication.
+  - Integration tests for frontend WebSocket scenarios.
+
+### Changed
+- Updated `README.md` to reflect the new real-time communication feature and mention the `ws` library.
+- Modified `backend/src/main.js` to set up and integrate the WebSocket server.
+- Modified `backend/src/services/agent.service.js` and `backend/src/services/advanced-agent.service.js` to stream responses over WebSocket.
+- Modified `frontend/src/app/components/agent-chat/agent-chat.component.ts` and `frontend/src/app/components/advanced-agent-chat/advanced-agent-chat.component.ts` to use `WebsocketService`.
+- Created `frontend/src/app/services/websocket.service.ts`.
+- Created unit tests for `WebsocketService` and contract tests for WebSocket communication.
+
+### Removed
+- (No removals in this version)
+
 ## 0.4.0 - 2025-09-24
 
 ### Added
