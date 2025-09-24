@@ -6,6 +6,7 @@ This project demonstrates a full-stack application integrating a LangChain.js ag
 This application has been enhanced to include a blog post generation feature, where a LangChain.js agent can research a given topic and generate a detailed blog post in Markdown format. Furthermore, it now supports **sophisticated LangChain.js agents** with advanced capabilities like conversational memory, complex reasoning, and integration with various tools (search, calculator, file system).
 
 ## Features
+- **Cloud Deployment**: Documented cloud deployment strategy for Google Cloud Platform (GCP), including Docker containerization of frontend and backend, deployment to Cloud Run/Kubernetes, hosting frontend on Cloud Storage/CDN, environment variable setup, CI/CD pipeline, and monitoring.
 - **Real-time Communication**: Switched from traditional REST API to WebSocket for agent-frontend communication, enabling real-time streaming of LangChain.js agent responses for a dynamic and conversational feel.
 - **User Authentication and Session Management**: Secure user authentication system with JWT-based flow, including user registration, login, and silent token refresh. Access to agent functionality is restricted to authenticated users.
 - **Enhanced Frontend UI/UX**: A modern, responsive, and intuitive Angular frontend with Angular Material components, minimalist dark mode, real-time feedback (spinners, progress bars, toast notifications), and graceful error handling.
@@ -30,6 +31,7 @@ This application has been enhanced to include a blog post generation feature, wh
   - **Other Tools**: File System (via `FileManagementToolkit`), Calculator (via `Calculator` class)
   - **Memory**: `ConversationBufferWindowMemory`
   - **Unit/Integration/API Testing**: Jest
+- **Deployment**: Docker, Google Cloud Platform (Cloud Run, Kubernetes, Cloud Storage, Cloud CDN, Secret Manager, Cloud Monitoring, Cloud Logging, Cloud Build)
 - **API Definition**: OpenAPI (Swagger)
 
 ## Setup Instructions

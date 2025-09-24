@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.6.0 - 2025-09-24
+
+### Added
+- **Feature 006: Cloud Deployment**: Documented a cloud deployment strategy for Google Cloud Platform (GCP).
+  - Containerization of Angular frontend and Express.js/LangChain.js backend using Docker.
+  - Deployment of backend to Cloud Run/Kubernetes for scalability and auto-scaling (CPU, RPS, custom metrics).
+  - Hosting of frontend on Cloud Storage and serving via Cloud CDN for fast, global delivery.
+  - Instructions for setting up environment variables and managing secrets with Google Secret Manager.
+  - CI/CD pipeline setup using Cloud Build for automated deployments.
+  - Monitoring setup using Cloud Monitoring and Cloud Logging.
+  - Local Dockerfiles for frontend and backend.
+  - Integration tests for cloud deployment aspects.
+
+### Changed
+- Updated `README.md` to reflect the new cloud deployment feature and related technologies.
+- Modified `backend/Dockerfile` and `frontend/Dockerfile` for containerization.
+- Created `frontend/nginx.conf` for Nginx configuration in frontend Docker image.
+- Updated `frontend/angular.json` to correctly reference `styles.scss` and include Angular Material pre-built theme.
+- Updated `frontend/src/app/app.component.ts` to remove unused imports.
+- Updated `frontend/src/app/services/error-handler.service.ts` to correctly handle `HttpErrorResponse` stack traces.
+- Updated `frontend/src/styles.scss` to remove Sass-specific syntax.
+- Created `backend/tests/integration/cloud-deployment.test.js` for integration tests.
+- Created `cloudbuild.yaml` for CI/CD pipeline.
+
+### Removed
+- (No removals in this version)
+
 ## 0.5.0 - 2025-09-24
 
 ### Added

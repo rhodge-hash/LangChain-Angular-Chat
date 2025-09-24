@@ -14,14 +14,13 @@ import { CommonModule } from '@angular/common'; // Import CommonModule
   imports: [
     CommonModule, // Add CommonModule
     RouterOutlet,
-    AdvancedAgentChatComponent,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
     MatButtonModule // Add MatButtonModule
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.css'
 })
 export class AppComponent {
   title = 'frontend';

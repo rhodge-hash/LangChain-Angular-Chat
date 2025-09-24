@@ -11,6 +11,8 @@ Auto-generated from all feature plans. Last updated: 2025-09-23
 - In-memory store for user credentials (for prototype), JWT stored securely on Angular frontend. (004-feature-004-user)
 - In-memory store for user credentials (for prototype), JWT stored securely on Angular frontend using `localStorage`. (004-feature-004-user)
 - JavaScript/TypeScript (Node.js, Angular) + Express.js, `ws` (WebSocket library), Angular (005-feature-005-real)
+- JavaScript/TypeScript (Node.js, Angular) + Docker, Google Cloud SDK, Cloud Build, Cloud Run/Kubernetes, Cloud Storage, Cloud CDN, Google Secret Manager, Cloud Monitoring, Cloud Logging. (006-feature-006-cloud)
+- Cloud Storage (for frontend assets). (006-feature-006-cloud)
 
 ## Project Structure
 ```
@@ -25,8 +27,8 @@ npm test [ONLY COMMANDS FOR ACTIVE TECHNOLOGIES][ONLY COMMANDS FOR ACTIVE TECHNO
 JavaScript/TypeScript (Node.js, Angular): Follow standard conventions
 
 ## Recent Changes
+- 006-feature-006-cloud: Added JavaScript/TypeScript (Node.js, Angular) + Docker, Google Cloud SDK, Cloud Build, Cloud Run/Kubernetes, Cloud Storage, Cloud CDN, Google Secret Manager, Cloud Monitoring, Cloud Logging.
 - 005-feature-005-real: Added JavaScript/TypeScript (Node.js, Angular) + Express.js, `ws` (WebSocket library), Angular
-- 004-feature-004-user: Added JavaScript/TypeScript (Node.js, Angular) + Express.js, JWT, bcrypt (for hashing), Angular
 - 004-feature-004-user: Added JavaScript/TypeScript (Node.js, Angular) + Express.js, JWT, bcrypt (for hashing), Angular
 
 <!-- MANUAL ADDITIONS START -->
